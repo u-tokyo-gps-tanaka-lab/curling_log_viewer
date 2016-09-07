@@ -1,16 +1,21 @@
 # curling_log_viewer
 ------
 ## 概要
+
 電気通信大学エンターテイメントと認知科学研究ステーション (http://entcog.c.ooco.jp/entcog/)が中心となって運営しているデジタルカーリング大会 (http://minerva.cs.uec.ac.jp/curling/wiki.cgi) のログをブラウザ上で表示するためのプログラムです．
+
 -------
 ## インストール
+
 python3の標準的なライブラリ以外に，Bottle (http://bottlepy.org/docs/dev/index.html) というWeb Framework を使っています．
 
  pip install bottle
 
 でインストール可能なはずです．
+
 -------
 ## 使い方
+
 pythonで書かれた簡易Webサーバ(標準ではポート 8080 で待ち受ける)を起動します．
 
  ./server/bottle_viewer.py [-p port] log_top_directory
