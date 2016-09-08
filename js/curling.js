@@ -1,4 +1,4 @@
-var i2pRate = 1.5;
+var m2pRate = 59;
 var end = 1;
 var stone = 0;
 var records = [];
@@ -156,16 +156,8 @@ Shot.prototype.toString = function() {
   return '(' + this.point.toString() + ', ' + this.rot.toString() + ')';
 };
 
-function i2p(inch) {
-  return Math.floor(i2pRate * inch);
-}
-
-function f2p(feet) {
-  return i2p(feet * 12);
-}
-
-function m2f(meter) {
-  return meter / 0.305;
+function m2p(meter) {
+  return Math.floor(m2pRate * meter);
 }
 
 function setScoreBoard() {
@@ -205,13 +197,13 @@ function setRecord() {
     if (cols[0] === 'POSITION=POSITION') {
       stones = [];
       for (var j = 1; j < cols.length - 1; j += 2) {
-        var f1 = parseFloat(cols[j]), f2 = parseFloat(cols[j + 1]);
-        if (f1 != 0.0 || f2 != 0.0) {
+        var m1 = parseFloat(cols[j]), m2 = parseFloat(cols[j + 1]);
+        if (m1 != 0.0 || m2 != 0.0) {
           var color = ((j - 1) / 2) % 2;
           if (firstPlayer == 1) {
             color = 1 - color;
           }
-          stones.push(new Stone(color, new Point(f1, f2)));
+          stones.push(new Stone(color, new Point(m1, m2)));
         }
       }
       records.push(stones);
@@ -260,14 +252,14 @@ function setRecord() {
 
 function hline(ctx, y) {
   ctx.beginPath();
-  ctx.moveTo(0, f2p(y));
-  ctx.lineTo(ctx.width, f2p(y));
+  ctx.moveTo(0, m2p(y));
+  ctx.lineTo(ctx.width, m2p(y));
   ctx.stroke();
 }
 
 function vline(ctx, x) {
   ctx.beginPath();
-  var ix = Math.min(ctx.width - 1, f2p(x));
+  var ix = Math.min(ctx.width - 1, m2p(x));
   ctx.moveTo(ix, 0);
   ctx.lineTo(ix, ctx.height);
   ctx.stroke();
@@ -277,7 +269,7 @@ function drawCircle(ctx, point, r, color) {
   ctx.beginPath();
   ctx.lineWidth = 2.0;
   ctx.strokeStyle = color;
-  ctx.arc(f2p(point.x), f2p(point.y), f2p(r), 0, 2 * Math.PI, false);
+  ctx.arc(m2p(point.x), m2p(point.y), m2p(r), 0, 2 * Math.PI, false);
   ctx.stroke();
 }
 
@@ -286,29 +278,21 @@ function scircle(ctx, point, r, color) {
   ctx.lineWidth = 1.0;
   ctx.strokeStyle = 'rgb(0, 0, 0)';
   ctx.fillStyle = color;
-  ctx.arc(f2p(point.x), f2p(point.y), f2p(r), 0, 2 * Math.PI, false);
+  ctx.arc(m2p(point.x), m2p(point.y), m2p(r), 0, 2 * Math.PI, false);
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(f2p(point.x), f2p(point.y), f2p(r), 0, 2 * Math.PI, false);
+  ctx.arc(m2p(point.x), m2p(point.y), m2p(r), 0, 2 * Math.PI, false);
   ctx.stroke();
-}
-
-function trans2feet(point) {
-  //  alert(point);
-  var x = point.x, y = point.y;
-  return new Point(m2f(x), m2f(y) - 4);
 }
 
 function drawStone(ctx, stone) {
   var color = drawColors[stone.col];
-  var point = trans2feet(stone.point);
-  drawCircle(ctx, point, 5 / 12.0, color);
+  drawCircle(ctx, stone.point, 0.145, color);
 }
 
 function fillStone(ctx, stone) {
   var color = fillColors[stone.col];
-  var point = trans2feet(stone.point);
-  scircle(ctx, point, 5 / 12.0, color);
+  scircle(ctx, stone.point, 0.145, color);
 }
 
 function shotToPoints(shot) {
@@ -346,26 +330,26 @@ function drawLine(ctx, p0, p1, color) {
   ctx.beginPath();
   ctx.lineWidth = 2.0;
   ctx.strokeStyle = color;
-  ctx.moveTo(f2p(p0.x), f2p(p0.y));
-  ctx.lineTo(f2p(p1.x), f2p(p1.y));
+  ctx.moveTo(m2p(p0.x), m2p(p0.y));
+  ctx.lineTo(m2p(p1.x), m2p(p1.y));
   ctx.stroke();
 }
 
 function drawTrack(ctx, shot, color) {
   var points = shotToPoints(shot);
+  console.log(JSON.stringify(points));
   for (var i = 0; i < points.length - 1; i++) {
-    drawLine(ctx, trans2feet(points[i]), trans2feet(points[i + 1]), color);
+    drawLine(ctx, points[i], points[i + 1], color);
   }
 }
 
 function drawTracks(ctx, shot, realShot, player) {
-  var startPoint = new Point(8, 135.79 - 4);
   drawTrack(ctx, shot, drawColors[player]);
   drawTrack(ctx, realShot, fillColors[player]);
 }
 
 function ccircle(ctx, r, color) {
-  scircle(ctx, new Point(8, 12), r, color);
+  scircle(ctx, new Point(2.375, 4.88), r, color);
 }
 
 function getEnd(rn) {
@@ -388,8 +372,8 @@ function draw() {
   if (firstPlayers[getEnd(rn) - 1] == 1) {
     player = 1 - player;
   }
-  ctx.width = f2p(16);
-  ctx.height = f2p(33 + 1);
+  ctx.width = m2p(4.75);
+  ctx.height = m2p(11.28);
   ctx.beginPath();
   ctx.moveTo(0, 0);
   ctx.lineTo(ctx.width, 0);
@@ -402,16 +386,21 @@ function draw() {
   // draw a rectanble
   hline(ctx, 0);
   vline(ctx, 0);
-  vline(ctx, 16);
+  vline(ctx, 4.75);
   // draw circles
-  ccircle(ctx, 6, 'rgb(0, 0, 255)');
-  ccircle(ctx, 4, 'rgb(255, 255, 255)');
-  ccircle(ctx, 2, 'rgb(255, 0, 0)');
-  ccircle(ctx, 0.5, 'rgb(255, 255, 255)');
-  hline(ctx, 6);
-  hline(ctx, 12);
-  hline(ctx, 33);
-  vline(ctx, 8);
+  ccircle(ctx, 1.83, 'rgb(0, 0, 255)');
+  ccircle(ctx, 1.22, 'rgb(255, 255, 255)');
+  ccircle(ctx, 0.61, 'rgb(255, 0, 0)');
+  ccircle(ctx, 0.1525, 'rgb(255, 255, 255)');
+  hline(ctx, 4.88 - 1.83);
+  hline(ctx, 4.88);
+  hline(ctx, 11.28);
+  // center line
+  ctx.beginPath();
+  var ix = Math.min(ctx.width - 1, m2p(2.375));
+  ctx.moveTo(ix, m2p(1.22));
+  ctx.lineTo(ix, ctx.height);
+  ctx.stroke();
   if (getStone(rn) != 16) {
     var sn = (getEnd(rn) - 1) * 16 + getStone(rn);
     drawTracks(ctx, shots[sn], realShots[sn], player);
@@ -419,12 +408,12 @@ function draw() {
     var redStones = Math.floor(restStones / 2);
     var yellowStones = restStones - redStones;
     for (var i = 0; i < redStones; i++) {
-      var point = new Point(i * 0.8 + 1.0, 33.5);
-      scircle(ctx, point, 3 / 12.0, fillColors[0]);
+      var point = new Point((i * 0.8 + 0.8) * 0.3048, 0.20);
+      scircle(ctx, point, 0.075, fillColors[0]);
     }
     for (var i = 0; i < yellowStones; i++) {
-      var point = new Point(16 - i * 0.8 - 1.0, 33.5);
-      scircle(ctx, point, 3 / 12.0, fillColors[1]);
+      var point = new Point((16 - i * 0.8 - 1.2) * 0.3048, 0.20);
+      scircle(ctx, point, 0.075, fillColors[1]);
     }
   }
   if (getStone(rn) != 0) {
