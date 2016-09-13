@@ -407,6 +407,9 @@ function draw() {
     var restStones = 16 - getStone(rn);
     var redStones = Math.floor(restStones / 2);
     var yellowStones = restStones - redStones;
+    if (firstPlayers[getEnd(rn) - 1] == 1) {
+      [redStones, yellowStones] = [yellowStones, redStones];
+    }
     for (var i = 0; i < redStones; i++) {
       var point = new Point((i * 0.8 + 0.8) * 0.3048, 0.20);
       scircle(ctx, point, 0.075, fillColors[0]);
