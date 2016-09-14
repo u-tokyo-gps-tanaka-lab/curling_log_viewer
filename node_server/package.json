@@ -1,0 +1,24 @@
+{
+  "name": "curling_log_viewer",
+  "version": "1.0.0",
+  "description": "curling log viewer",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/u-tokyo-gps-tanaka-lab/curling_log_viewer.git"
+  },
+  "author": "Tetsuro Tanaka",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/u-tokyo-gps-tanaka-lab/curling_log_viewer/issues"
+  },
+  "homepage": "https://github.com/u-tokyo-gps-tanaka-lab/curling_log_viewer#readme",
+  "dependencies": {
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "minimist": "^1.2.0"
+  }
+}
