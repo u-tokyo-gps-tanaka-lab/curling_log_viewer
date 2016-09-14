@@ -5,7 +5,8 @@
 電気通信大学エンターテイメントと認知科学研究ステーション (http://entcog.c.ooco.jp/entcog/)が中心となって運営しているデジタルカーリング大会 (http://minerva.cs.uec.ac.jp/curling/wiki.cgi) のログをブラウザ上で表示するためのプログラムです．
 
 -------
-## インストール
+## python3 版
+### インストール
 
 python3の標準的なライブラリ以外に，Bottle (http://bottlepy.org/docs/dev/index.html) というWeb Framework を使っています．
 
@@ -14,7 +15,7 @@ python3の標準的なライブラリ以外に，Bottle (http://bottlepy.org/doc
 でインストール可能なはずです．
 
 -------
-## 使い方
+### 使い方
 
 pythonで書かれた簡易Webサーバ(標準ではポート 8080 で待ち受ける)を起動します．
 
@@ -33,6 +34,19 @@ pythonで書かれた簡易Webサーバ(標準ではポート 8080 で待ち受�
 - [>>>] ゲーム終了時まで進む
 
 ![viewer画面](https://github.com/u-tokyo-gps-tanaka-lab/curling_log_viewer/blob/images/viewer_sample.png)
+
+------
+## Node.js 版
+### インストール
+Node.jsおよびそのパッケージシステムである npmが使えるというのが前提になります．mざうは，node_serverのディレクトリに移動して
+
+ npm install 
+
+を実行してください．その後，
+
+ node app.js [-p port] log_top_directory
+
+で起動してください．後は，Python3 版と同じです．
 
 -------
 ## 注意
