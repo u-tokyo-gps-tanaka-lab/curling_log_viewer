@@ -38,11 +38,11 @@ pythonで書かれた簡易Webサーバ(標準ではポート 8080 で待ち受�
 ------
 ## Node.js 版
 ### インストール
-Node.jsおよびそのパッケージシステムである npmが使えるというのが前提になります．mざうは，node_serverのディレクトリに移動して
+Node.jsおよびそのパッケージシステムである npmが使えるというのが前提になります．インストールは node_serverのディレクトリに移動して
 
  npm install 
 
-を実行してください．その後，
+を実行するだけで終わるはずです．その後，
 
  node app.js [-p port] log_top_directory
 
