@@ -2,7 +2,7 @@
 ------
 ## 概要
 
-電気通信大学エンターテイメントと認知科学研究ステーション (http://entcog.c.ooco.jp/entcog/)が中心となって運営しているデジタルカーリング大会 (http://minerva.cs.uec.ac.jp/curling/wiki.cgi) のログをブラウザ上で表示するためのプログラムです．
+電気通信大学エンターテイメントと認知科学研究ステーション (http://entcog.c.ooco.jp/entcog/) が中心となって運営しているデジタルカーリング大会 (http://minerva.cs.uec.ac.jp/curling/wiki.cgi) のログをブラウザ上で表示するためのプログラムです．
 
 -------
 ## python3 版
