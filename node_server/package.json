@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/u-tokyo-gps-tanaka-lab/curling_log_viewer#readme",
   "dependencies": {
-    "ejs": "^2.5.2",
+    "ejs": "^3.1.10",
     "express": "^4.14.0",
     "minimist": "^1.2.0"
   }
